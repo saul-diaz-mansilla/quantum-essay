@@ -1,0 +1,297 @@
+\documentclass{article}
+\usepackage[left=4cm,right=4cm]{geometry}
+\usepackage{graphicx}
+\usepackage[font=small]{caption}
+\usepackage{subcaption}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{amssymb}
+\usepackage{float}
+\usepackage{textcomp}
+\usepackage{setspace}
+\usepackage{mathrsfs}
+\usepackage[superscript]{cite}
+\usepackage{import}
+
+% A short guide to Quantum's hot tourist attractions: from wavefunctions to semiconductors
+\title{Three pills to kill classical physics:\\ why should you take them}
+\author{Saúl Díaz Mansilla, CID 06070018}
+\date{\small (Word count: 298 + 2283)}
+
+\renewcommand{\abstractname}{Research and methods}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+    Research for this essay started by a discussion with friends about the topics they had chosen. One of them mentioned the derivation of the Schrödinger equation using Hamilton-Jacobi theory. This reminded me of a course I had taken at my home university \cite{sabiovera2024}, and I remembered one of the topics I found most interesting from that course: Bloch's theorem and conduction bands. I also remembered a simple statement of the Kronig-Penney model at the PLANCKS competition \cite{plancks2025solutions}, so I decided to follow that derivation.
+
+    When looking at the Q\&A in Blackboard, I decided that the wavefunction, Schrödinger's equation and tunneling were key concepts to understand the Kronig-Penney model, so I decided to include them as well. To explain them, I revised the lecture notes \cite{foulkes_notes} and consulted Griffiths' \textit{Introduction to Quantum Mechanics} \cite{griffiths2018} for reference.
+
+    When I had finished the outline, I solved the quantum tunneling problem in various ways to find the simplest one to understand, and did the same for the Kronig-Penney model. Then, I started to think of analogies and experiments to motivate the wavefunction concept. I finally settled on the double slit experiment, as it can be used both as a thought experiment, when thinking about sending particles one by one, and an actual experiment that has been verified.
+
+    Figures were made using \textit{python}, and I sped up the process using GAI to quickly write the main scripts to then modify them myself according to the result I wanted. I also used GAI to quickly find suitable parameters for figure \ref{fig:bands_materials}, which I then verified using scientific sources.
+
+    Finally, it was just a matter of putting everything together (figures and equations) and started writing. Then I revised the text a bunch of times, checking with the rubric, to find poorly explained sections and to polish format and logic.
+
+\end{abstract}
+
+\newpage
+\section{Introduction}
+
+Classical physics is \textit{wrong}. And it's time to get rid of it. Several diagnoses were made at the start of the 20th century, and what started as a cold became a terminal illness. 
+
+% Quantum physics is \textit{weird}. It is one of the most famous, disconcerting, and misunderstood areas of physics, and maybe one of the reasons you decided to study physics in the first place. If you have ever heard about wavefunctions, superposition, or tunneling, my goal today is to help you understand them. And as a bonus, we will have a little peek at Quantum's wide applications, with a simple model of a semiconductor.
+
+\section{The wavefunction: why probabilities?}
+
+In the early 20th century, some experiments started to show cracks in classical physics, hinting at a more fundamental theory: what we now call quantum mechanics. Einstein managed to explain one of these experiments, the photoelectric effect \cite{einstein1905heuristic}, by proposing that light is made of particles: quanta of light, or as we know them today, photons.
+
+Now think of a laser beam pointing towards two slits. We know that light diffracts so if we place a screen behind the slits, we will see an interference pattern (\textit{obviously}, it's a wave): it will cancel out at some places and build up at others.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\linewidth]{diffraction.pdf}
+    \caption{Interference resulting from light passing through two slits. Peaks and troughs are represented in red and blue respectively, no wave is present on the white areas.}
+    \label{fig:double_slit}
+\end{figure}
+
+But if light is made of particles, what if we have a laser so precise that we can emit light \textit{photon by photon}? What would the pattern be?
+
+Firstly, we have to clarify what do we even \textit{mean} by pattern now. What was previously light intensity at point $x$ is now the amount of photons detected at point $x$, basically, a histogram.
+
+Now, what happens we send a single photon? \textit{A priori} you would think that the photon either goes through one slit or the other, so the resulting pattern would be two bulges in front of the slits\cite{feynman1965lectures}. But we \textit{know} that after shooting a large number of photons we should see interference. So our first hypothesis can't be correct: it seems that when the photon passes through one slit, it \textit{knows} about the other one. What is going on? Is light a wave or a particle?
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\linewidth]{two_slit_pattern.pdf}
+    \caption{Interference pattern made by light when passing through two slits at a screen parallel to the slits. The blue line represents a wave behavior and the orange represents a classical particle behavior.}
+    \label{fig:interference}
+\end{figure}
+
+To make things worse, if we repeat this experiment with electrons (which are \textit{obviously} particles) we don't observe what we would expect from a particle, but again a new interference pattern. Then... are electrons not particles?
+
+% The answer to this apparent paradox comes by accepting three new facts about how nature works:
+
+% Quantum mechanics offers us a trade to explain this apparent paradox: we obtain the result we observe, but have to accept three new facts about nature at small scales:
+
+Brilliant minds managed to explain this paradoxical result by using three ``medicines" that lay the foundations of the quantum theory (and they are hard pills to swallow!):
+\begin{enumerate}
+    \item \textbf{Wavefunctions}: quantum objects are neither a wave nor a particle: they are something new, described by a mathematical tool called the \textit{wavefunction}, $\psi(\vec{r},t)$ (for electrons, photons are more complicated as they travel at relativistic speeds). It is complex-valued and ``makes sure" each individual particle has the wave-like properties we observe globally.
+    \item \textbf{Uncertainty}: quantum objects (photons, electrons and more) \textit{do not have a defined position} (and neither a defined momentum, energy, etc.). Instead, they live in a superposition of many different possibilities.
+    \item \textbf{Probabilities}: when we measure something about a quantum object, say, its position, we find it a random place. The likelihood of finding the object at each position (the \textit{probability density}) is given by the intensity of its wavefunction, $|\psi(\vec{r},t)|^2$, mimicking how the intensity of light is given by its modulus squared. If you recall how probability densities work, this means that the probability of finding the particle on an interval $(a,b)$ is:
+    \begin{equation}
+        P(a<x<b)=\int_a^b |\psi(x,t)|^2 dx
+    \end{equation}
+\end{enumerate}
+
+This explains our experiment: when an electron is emitted, its wavefunction propagates along space, and goes through \textbf{both slits}. Then the wavefunction interferes with itself, canceling where peaks and troughs match, just as a wave would do, but for a single particle.
+
+When the electron ``hits" the screen, what is really happening is we are measuring its position, so we get a random value according to its probability density at the screen, $|\psi|^2$. This means that if we emit enough electrons, and plot a histogram for the number of electrons detected at position $x$, its shape will approach $|\psi|^2$, which is \textit{exactly} the interference pattern we expected.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\linewidth]{two_slit_hist.pdf}
+    \caption{Histogram of electron detections at a screen after passing through two slits. The shape of the histogram matches the interference pattern predicted by wave mechanics.}
+    \label{fig:two_slit_hist}
+\end{figure}
+
+\section{The Schrödinger equation and plane waves}
+
+Now that we know that we need wavefunctions to describe nature, we need a precise mathematical equation to describe their behavior. 
+
+Now we know that nature is fundamentally probabilistic, and we need wavefunctions to describe it. But how do these wavefunctions \textit{work}? We need an equation to describe their shape and time evolution, an analog of the classical wave equation. The equation we are looking for is called the (time dependent) Schrödinger equation, and looks like this for 1 dimension \cite{griffiths2018}:
+\begin{equation}
+    -\frac{\hbar^2}{2m}\frac{\partial^2\psi}{\partial x^2}+V(x)\psi=i\hbar\frac{\partial\psi}{\partial t} \label{eq:tdse}
+\end{equation}
+where $V(x)$ is the potential energy and $\hbar$ is a fundamental constant of nature known as the \textit{reduced Planck's constant}.
+
+You might notice that this equation is surprisingly simple, and has a key feature: it is \textit{linear}. And what does this mean? That if we have two solutions, \textbf{any linear combination of them is also a solution}.
+
+This gives rise to one of the most famous consequences of quantum mechanics: \textbf{superposition}. We have already seen this effect in our previous experiment: we can think of a wavefunction $\psi_1$ when the electron \textit{only} goes through the first slit, and $\psi_2$ when the electron \textit{only} goes through the second one. Then the wavefunction we get through the histogram is a superposition of both: the electron is ``going through both slits at once".
+
+% Imagine an electron and two boxes and Schrödinger's equation has two solutions: at $\psi_A$ the electron is inside box A, and at $\psi_B$, the electron is inside box B. Then, for example, $1/\sqrt{2} (\psi_A + \psi_B)$ is also a solution. Now if we ``open'' box A, the electron will be there 50\% of the time and it will be at box B the other 50\%. But once you open the box and find the electron at, say, box A, the wavefunction becomes $\psi_A$, and you will always find the electron at box A after.
+
+Now let's see how to solve the Schrödinger equation. It turns out that the time dependent part of this equation is really easy to solve. For a state with energy $E$, the solutions are \cite{foulkes_notes} $\psi(x,t)=u(x)e^{-i\omega t}$, where $E=\hbar\omega$. Substituting this on equation \eqref{eq:tdse}, we get the time independent Schrödinger equation (TISE):
+\begin{equation}
+    -\frac{\hbar^2}{2m}\frac{d^2u}{dx^2}+V(x)u(x)=Eu(x) \label{eq:tise}
+\end{equation}
+
+Let's look at the simplest case: $V(x)=0$. The equation becomes that of a simple harmonic oscillator:
+\begin{equation}
+    \frac{d^2u}{dx^2}=-\left(\frac{\sqrt{2mE}}{\hbar}\right)^2u(x) = -k^2u(x) \label{eq:hose}
+\end{equation}
+so the solutions to this equation are sines and cosines, or alternatively, complex exponentials: $u(x)= \mathcal{R} e^{ikx} + \mathcal{L} e^{-ikx}$. Together with the temporal part, we see that our solutions are just plane waves traveling to the right (plus) and left (minus):
+\begin{equation*}
+    \psi(x,t)\sim \mathcal{R}e^{kx-\omega t} + \mathcal{L}e^{-kx-\omega t}
+\end{equation*}
+where $\mathcal{R}$ and $\mathcal{L}$ are just (complex) coefficients.
+
+I am being deliberately vague about equality in the previous equations, as in general, an electron can be in a superposition of infinitely many plane waves with different coefficients for each one.
+
+% but as $k=\sqrt{2mE}/\hbar$, we have that $\omega=\hbar k^2/2m$, which is different from the relation for light waves, $\omega=ck$.
+
+\section{Quantum tunneling: when intuition fails}
+
+Now let's see one of the most bizarre consequences of quantum mechanics. Consider a very simple potential: a square barrier of width $b$ and height $V_0$. To make the math even simpler, we will keep the area constant ($\beta=bV_0=\text{const.}$) and take the limit as $b\to 0$ to get a delta function. It turns out that the shape of the barrier doesn't matter as much (even if it is infinite) as its integral.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\linewidth]{potential_barrier.pdf}
+    \caption{Rectangular potential barrier of width $b$ and height $V_0$, approximated by a delta function as $b\to 0$ with constant area $\beta=bV_0$. In blue we represent the incoming wavefunction of an electron with energy $E<V_0$.}
+    \label{fig:potential_barrier}
+\end{figure}
+
+The TISE for this barrier will be:
+\begin{equation}
+    -\frac{\hbar^2}{2m}\frac{d^2u}{dx^2} + \beta\delta(x)u(x)=Eu(x)
+\end{equation}
+
+We have two regions with no potential separated by an infinite barrier: $x<0$ and $x>0$. Let's say we emit an electron with energy $E$ from the left towards the barrier. In this region the TISE looks like a harmonic oscillator, so the solutions are again complex exponentials. Furthermore, as the electron is moving to the right, our solution here is $u(x)=e^{ikx}$ with $k=\sqrt{2mE}/\hbar$.
+
+Now let's see what happens when the electron hits the barrier. There's two possibilities: either the electron is transmitted through the barrier or it is reflected. Let's consider both options. We will consider a reflected left-traveling wave at $x<0$ and a transmitted right-traveling wave at $x>0$. The coefficients $r$ and $t$ will determine how much of the original wave is transmitted or reflected:
+\begin{equation}
+    u(x)=\begin{cases}
+        e^{ikx}+re^{-ikx} & x<0 \\
+        te^{ikx} & x>0
+    \end{cases}
+\end{equation}
+But wait, how can the electron go through a barrier that has \textit{more energy} than it has? It would be like throwing a ball at the base of a hill and it suddenly appearing at the other hillside! Let's just consider that possibility, and if we are wrong, we will just recover $t=0$.
+
+As $u$ has to be continuous at $x=0$, we need $u(0^+)=u(0^-)$, so
+\begin{equation}
+    1+r=t \label{eq:condition_1}
+\end{equation}
+Furthermore, by integrating the TISE over a small interval $(-\varepsilon, \varepsilon)$, we see that its derivative is discontinuous with a jump of:
+\begin{equation*}
+    u'(0^+)-u'(0^-)=\frac{2m\beta}{\hbar^2}u(0)
+\end{equation*}
+This gives the equation:
+\begin{equation}
+    ikt-ik+ikr=\frac{2m\beta}{\hbar^2}t \label{eq:condition_2}
+\end{equation}
+Solving the system given by \eqref{eq:condition_1} and \eqref{eq:condition_2}, we get the coefficients of reflection and transmission:
+\begin{gather*}
+    r=\frac{q}{ik-q}\\
+    t=\frac{ik}{ik-q}
+\end{gather*}
+where we have named $q=m\beta/\hbar^2$. Remember that probabilities are given by the modulus squared of the wavefunction, so the probability that the electron is transmitted is:
+\begin{equation*}
+    |t|^2=\frac{k^2}{k^2+q^2}=\frac{2E\hbar^2}{2E\hbar^2+m\beta^2}
+\end{equation*}
+You can calculate $|r|^2$ and verify that both probabilities add up to 1. Using typical values for an electron and the barrier ($E = 1$ eV, $\beta = 2 $ eV Å), we get that the tunneling probability is of around 79\%, so most electrons actually go through the barrier!
+
+Although bizarre, let's make sense of this expression: as the strength of the barrier (although it is already infinite) grows, $\beta \to \infty$, the tunneling probability goes to zero. This makes sense, and is equivalent to having an infinite barrier with finite width in the finite barrier case. We also see that as the electron's energy grows, $E\to\infty$, $|t|^2\to 1$. This also makes sense, if the electron has enough energy to go over the barrier, it will always do.
+
+This property is an exclusively quantum result, called quantum tunneling, and applies to all barriers. Although not guaranteed, there is always a possibility that an electron tunnels through a barrier, and it decreases with barrier width and height.
+
+\section{Quantum crystals and semiconductors}
+
+You might be wondering where potential barriers come up in practice. Well, they are everywhere! In fact, they are key to understanding how crystalline solids (materials where atoms are arranged in a periodic lattice) work.
+
+Let's try to model a simple solid in 1 dimension and see what we get. We will have nuclei set at periodic positions in a lattice, each with a potential of $V(x)\propto 1/|x-x_i|$. We can approximate \cite{kronigpenney1931} this structure by using delta functions as seen in figure \ref{fig:kp_potential}. This is called the Kronig-Penney model \cite{kittel2004}.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{kp_potential.pdf}
+    \caption{Kronig-Penney approximation for the potential of a 1D solid.}
+    \label{fig:kp_potential}
+\end{figure}
+
+But this is just the same problem we have just solved, with $\beta<0$, and with periodic barriers set apart a distance $a$. Let's look at the barrier set at $x=0$. Now we have one electron at each side of the barrier, so we have two wavefunctions superposed with coefficients: $u(x)=Au_\text{left}(x)+Bu_\text{right}(x)$ (we will follow the derivation at [\citen{plancks2025solutions}]). Each wavefunction corresponds to an electron going towards the barrier, so:
+\begin{equation}
+    u_\text{left}(x)=\begin{cases}
+        e^{ikx}+re^{-ikx} & x<0 \\
+        te^{-ikx} & x>0
+    \end{cases}
+\end{equation}
+and,
+\begin{equation}
+    u_\text{right}(x)=\begin{cases}
+        te^{ikx} & x<0 \\
+        e^{-ikx}+re^{ikx} & x>0
+    \end{cases}
+\end{equation}
+The electron from the left is heading towards the barrier (to the left) as in the tunneling example, and the electron on the right is heading also heading towards the barrier (so to the right). This means the second one has the signs changed and the initial electron is at $x>0$, at the right.
+
+Now we are almost there! We already know $r$ and $t$ from the previous problem, and as the potential is periodic, we might expect the wavefunction to be periodic as well. In fact, using what is called Bloch's Theorem \cite{griffiths2018}, we get two periodic conditions:
+\begin{gather}
+    u(x+a)=e^{i\lambda a}u(x)\\
+    u'(x+a)=e^{i\lambda a}u'(x)
+\end{gather}
+where $\lambda$ is a real number corresponding to the crystal ``momentum" \cite{sabiovera2024}. Plugging in $x=-a/2$ in the previous equations, we get a system of homogeneous equations for $A$ and $B$, that is, equations of the form $c_1A+c_2B=0$. This means, if there is a unique solution, then $A=B=0$. But this would yield $u(x)=0$, so no wavefunction at all. This means the determinant of the system must be equal to zero so that there are infinitely many solutions. Imposing this condition, we get an equation for $\lambda$:
+\begin{equation}
+    \cos(\lambda a)=\cos(ka)+qa\frac{\sin(ka)}{ka} \label{eq:bands}
+\end{equation}
+where $q=m\beta/\hbar^2$ and $k=\sqrt{2mE}/\hbar$. As the left hand side is a real cosine (and $\lambda$ is real), the right hand side must be between $-1$ and $1$. But wait, this isn't \textit{always} the case, so there are values of $E$ for which there is no $\lambda$, so no possible solution at that region. This results in allowed regions, called \textbf{bands}, and forbidden regions, called \textbf{gaps}. 
+
+Plotting the regions where there is a lambda value in blue as a function of the energy $E$, we obtain figure \ref{fig:bands}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\linewidth]{bands_silicon_wide.pdf}
+    \caption{Conduction bands of a 1D crystal (Si). The dotted red lines represent $-1$ and $1$. In blue the allowed energy bands, and in white the forbidden gaps.}
+    \label{fig:bands}
+\end{figure}
+
+Other results from Quantum show that energy is quantized, and no two electrons can have the same energy (technically, the same quantum numbers \cite{griffiths2018}). Thus, there is a finite number of electrons that can fit in each band. This means each atom's electrons start filling the bands from the lowest energy up. The last band filled with electrons is known as the \textit{valence band}.
+
+Let's look at different possibilities for $qa$\cite{sabiovera2024}:
+\begin{enumerate}
+    \item $qa\sim 1$: the behavior of \eqref{eq:bands} is dominated by the cosine term, so most regions lie between -1 and 1, resulting in large bands and small gaps (see figure \ref{fig:bands_copper}). When an external electric field is applied, electrons have many available energy levels to move into, so they can easily move through the material. We call these materials \textbf{conductors}.
+    \item $qa\sim 5$: the sine term dominates, so most regions lie outside -1 and 1, resulting in small bands and large gaps (see figure \ref{fig:bands_nacl}). When the valence band is completely filled, there are no available energy levels for the electrons to move into when an external field is applied, so they cannot move through the material. We call these materials \textbf{insulators}.
+    \item $qa\sim 10$: both terms are comparable, resulting in bands and gaps of similar size (see figure \ref{fig:bands_silicon}). When the valence band is completely filled, there are no available energy levels for the electrons to move into when an external field is applied, so they cannot move through the material. However, as the gap to the next band is small, electrons can jump into the next band and move through the material with a small energy input. We call these materials \textbf{semiconductors}.
+\end{enumerate}
+
+\begin{figure}[H]
+     \centering
+     \begin{subfigure}[b]{0.32\textwidth}
+         \centering
+         \includegraphics[width=\textwidth]{bands_copper.pdf}
+         \caption{\tiny{Cu (conductor), $qa=0.769$}}
+         \label{fig:bands_copper}
+     \end{subfigure}
+     \hfill
+     \begin{subfigure}[b]{0.32\textwidth}
+         \centering
+         \includegraphics[width=\textwidth]{bands_nacl.pdf}
+         \caption{\tiny{NaCl (insulator), $qa=8.91$}}
+         \label{fig:bands_nacl}
+     \end{subfigure}
+     \hfill
+     \begin{subfigure}[b]{0.32\textwidth}
+         \centering
+         \includegraphics[width=\textwidth]{bands_silicon.pdf}
+         \caption{\tiny{Si (semiconductor), $qa=4.64$}}
+         \label{fig:bands_silicon}
+     \end{subfigure}
+     \caption{Conduction bands of various materials using the Kronig-Penney model. In blue the allowed energy bands, and in white the forbidden gaps.}
+     \label{fig:bands_materials}
+\end{figure}
+
+This model is just a 1D simplification of how materials work, for example, it doesn't describe metals correctly. Nevertheless, we can learn some of the key concepts of conductivity from it, as it is the first model that introduced the concept of bands and gaps.
+
+\section{Conclusion}
+
+Quantum mechanics is our best theory of nature yet. We have just glanced at its applications by looking at quantum crystals, but they go much further: Quantum Field Theory manages to explain all of physics but gravity and a few small results, and has been proven right in most of its predictions.
+
+Nevertheless, it is still one of the least intuitive theories we have ever developed. It was rejected by many when it started to be developed, even by some of its own creators such as Einstein and Schrödinger.
+
+Today you got a taste of the weirdness of quantum mechanics: the three pills we have to swallow to explain experiments, as well as of its usefulness: how we can understand crystals and conductivity as we never could with classical mechanics.
+
+% Some of its core features are still unsettling for many physicists today: are particles \textit{really} in multiple places at once? What does \textit{measuring} a particle mean?
+
+\bibliographystyle{unsrt}
+
+\bibliography{bibliography}
+
+% To do list:
+% - cites for figure 6 & 7 and values for t^2
+% - review superposition section
+% - resesarch & writing methods review
+% - N1: Does the essay describe the background context of its subject? Does it indicate why the reader should be interested?
+% - N4: Do concluding comments, even if brief, reinforce the main points and describe their implications?
+% - M2: Is the quantity of mathematical expressions appropriate? Are there enough to be precise, but not so many as to disrupt the narrative? (tunneling)
+% - R1: Do the references cited appropriately support the text?
+
+\end{document}

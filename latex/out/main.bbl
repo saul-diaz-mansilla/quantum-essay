@@ -1,0 +1,52 @@
+\begin{thebibliography}{1}
+
+\bibitem{sabiovera2024}
+Agustín Sabio~Vera.
+\newblock Fundamentos de física {III} ({FF3}).
+\newblock Lecture Notes for Grupo 511, 2024.
+\newblock Covers classical, quantum, and relativistic physics foundations.
+
+\bibitem{plancks2025solutions}
+{Real Sociedad Española de Física (R.S.E.F.)}.
+\newblock Preliminares {PLANCKS} 2025: Solutions.
+\newblock Competition Problem Solutions, 2025.
+\newblock Includes solutions for Classical Mechanics, Electromagnetism, and
+  Quantum Control.
+
+\bibitem{foulkes_notes}
+Matthew Foulkes.
+\newblock Quantum physics: An introduction to quantum theory.
+\newblock Lecture Notes.
+\newblock Course material covering wave-particle duality and the Schrödinger
+  equation.
+
+\bibitem{griffiths2018}
+David~J. Griffiths and Darrell~F. Schroeter.
+\newblock {\em Introduction to Quantum Mechanics}.
+\newblock Cambridge University Press, 3rd edition, 2018.
+
+\bibitem{einstein1905heuristic}
+Albert Einstein.
+\newblock {\"U}ber einen die erzeugung und verwandlung des lichtes betreffenden
+  heuristischen gesichtspunkt.
+\newblock {\em Annalen der Physik}, 17(6):132--148, 1905.
+
+\bibitem{feynman1965lectures}
+Richard~P. Feynman, Robert~B. Leighton, and Matthew Sands.
+\newblock {\em The Feynman Lectures on Physics, Vol. III: The New Millennium
+  Edition: Quantum Mechanics}, volume~3.
+\newblock Basic Books, New York, 2011.
+
+\bibitem{kronigpenney1931}
+Ralph de~Laer Kronig and William~George Penney.
+\newblock Quantum {M}echanic of {E}lectrons in {C}rystal {L}attices.
+\newblock {\em Proceedings of the Royal Society of London. Series A, Containing
+  Papers of a Mathematical and Physical Character}, 130(814):499--513, 1931.
+
+\bibitem{kittel2004}
+Charles Kittel.
+\newblock {\em Introduction to Solid State Physics}.
+\newblock Wiley, 8th edition, 2004.
+\newblock Includes a detailed treatment of the Kronig-Penney model.
+
+\end{thebibliography}

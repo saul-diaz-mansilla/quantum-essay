@@ -14,8 +14,7 @@
 \usepackage{import}
 \usepackage{soul}
 
-% A short guide to Quantum's hot tourist attractions: from wavefunctions to semiconductors
-\title{A short guide to Quantum's hot tourist attractions: from wavefunctions to semiconductors}
+\title{The Quantum Traveler's Guide: from Wavefunctions to Semiconductors}
 \author{Saúl Díaz Mansilla, CID 06070018}
 \date{\small (Word count: 303 + 2315)}
 
@@ -26,15 +25,15 @@
 \maketitle
 
 \begin{abstract}
-    Research for this essay started by a discussion with friends about the topics they had chosen. One of them mentioned the derivation of the Schrödinger equation using Hamilton-Jacobi theory. This reminded me of a course I had taken at my home university \cite{sabiovera2024}, and I remembered one of the topics I found most interesting from that course: Bloch's theorem and conduction bands. I also remembered a simple statement of the Kronig-Penney model at the PLANCKS competition \cite{plancks2025solutions}, so I decided to follow that derivation.
+    Research for this essay started with a discussion with friends about the topics they had chosen. One of them mentioned the derivation of the Schrödinger equation using Hamilton-Jacobi theory. This reminded me of a course I had taken at my home university \cite{sabiovera2024}, and I remembered one of the topics I found most interesting from that course: Bloch's theorem and conduction bands. I also remembered a simple statement of the Kronig-Penney model at the PLANCKS competition \cite{plancks2025solutions}, so I decided to follow that derivation.
 
-    When looking at the Q\&A in Blackboard, I decided that the wavefunction, Schrödinger's equation and tunneling were key concepts to understand the Kronig-Penney model, so I decided to include them as well. To explain them, I revised the lecture notes \cite{foulkes_notes} and consulted Griffiths' \textit{Introduction to Quantum Mechanics} \cite{griffiths2018} for reference.
+    When looking at the Q\&A in Blackboard, I decided that the wavefunction, Schrödinger's equation, and tunneling were key concepts to understand the Kronig-Penney model, so I decided to include them as well. To explain them, I revised the lecture notes \cite{foulkes_notes} and consulted Griffiths' \textit{Introduction to Quantum Mechanics} \cite{griffiths2018} for reference.
 
-    When I had finished the outline, I solved the quantum tunneling problem in various ways to find the simplest one to understand, and did the same for the Kronig-Penney model. Then, I started to think of analogies and experiments to motivate the wavefunction concept. I finally settled on the double slit experiment, as it can be used both as a thought experiment, when thinking about sending particles one by one, and an actual experiment that has been verified.
+    When I had finished the outline, I solved the quantum tunneling problem in various ways to find the simplest one to understand, and did the same for the Kronig-Penney model. Then, I started to think of analogies and experiments to motivate the wavefunction concept. I finally settled on the double slit experiment, as it can be used both as a thought experiment, when thinking about sending particles one by one, and an actual experiment that has been verified. I checked my work with the Feynman Lectures\cite{feynman1965lectures} as they included a nice explanation for this result.
 
-    Figures were made using \textit{python}, and I sped up the process using GAI to quickly write the main scripts to then modify them myself according to the result I wanted. I also used GAI to quickly find suitable parameters for figure \ref{fig:bands_materials}, which I then verified using other sources.
+    Figures were made using \textit{Python}, and I sped up the process using GAI to quickly write the main scripts to then modify them myself according to the result I wanted. I also used GAI to quickly find suitable parameters for figure \ref{fig:bands_materials}, which I then verified using other sources.
 
-    Then it was just a matter of putting everything together (figures and equations) and writing. I revised the text a various times, checking with the rubric, to find poorly explained sections and to polish format and logic. I finally used AI to check for typos.
+    Then it was just a matter of putting everything together (figures and equations) and writing. I revised the text various times, checking with the rubric, to find poorly explained sections, and to polish the format and logic. I finally used AI to check for typos.
 
 \end{abstract}
 
@@ -91,16 +90,14 @@ When the electron ``hits" the screen, what is really happening is we are measuri
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\linewidth]{two_slit_hist.pdf}
+    \includegraphics[width=0.6\linewidth]{two_slit_hist.pdf}
     \caption{Histogram of electron detections at a screen after passing through two slits. The shape of the histogram matches the interference pattern predicted by wave mechanics.}
     \label{fig:two_slit_hist}
 \end{figure}
 
 \section{The Schrödinger equation and plane waves}
 
-Now that we know that we need wavefunctions to describe nature, we need a precise mathematical equation to describe their behavior. 
-
-Now we know that nature is fundamentally probabilistic, and we need wavefunctions to describe it. But how do these wavefunctions \textit{work}? We need an equation to describe their shape and time evolution, an analog of the classical wave equation. The equation we are looking for is called the (time dependent) Schrödinger equation, and looks like this for 1 dimension \cite{griffiths2018}:
+Now we know that nature is fundamentally probabilistic, and we need wavefunctions to describe it. But how do these wavefunctions \textit{work}? We need an equation to describe their shape and time evolution, an analog of the classical wave equation. The equation we are looking for is called the (time-dependent) Schrödinger equation, and looks like this for 1 dimension \cite{griffiths2018}:
 \begin{equation}
     -\frac{\hbar^2}{2m}\frac{\partial^2\psi}{\partial x^2}+V(x)\psi=i\hbar\frac{\partial\psi}{\partial t} \label{eq:tdse}
 \end{equation}
@@ -112,7 +109,7 @@ This gives rise to one of the most famous consequences of quantum mechanics: \te
 
 % Imagine an electron and two boxes and Schrödinger's equation has two solutions: at $\psi_A$ the electron is inside box A, and at $\psi_B$, the electron is inside box B. Then, for example, $1/\sqrt{2} (\psi_A + \psi_B)$ is also a solution. Now if we ``open'' box A, the electron will be there 50\% of the time and it will be at box B the other 50\%. But once you open the box and find the electron at, say, box A, the wavefunction becomes $\psi_A$, and you will always find the electron at box A after.
 
-Now let's see how to solve the Schrödinger equation. It turns out that the time dependent part of this equation is really easy to solve. For a state with energy $E$, the solutions are \cite{foulkes_notes} $\psi(x,t)=u(x)e^{-i\omega t}$, where $E=\hbar\omega$. Substituting this on equation \eqref{eq:tdse}, we get the time independent Schrödinger equation (TISE):
+Now let's see how to solve the Schrödinger equation. It turns out that the time-dependent part of this equation is really easy to solve. For a state with energy $E$, the solutions are \cite{foulkes_notes} $\psi(x,t)=u(x)e^{-i\omega t}$, where $E=\hbar\omega$. Substituting this on equation \eqref{eq:tdse}, we get the time-independent Schrödinger equation (TISE):
 \begin{equation}
     -\frac{\hbar^2}{2m}\frac{d^2u}{dx^2}+V(x)u(x)=Eu(x) \label{eq:tise}
 \end{equation}
@@ -137,8 +134,8 @@ Now let's see one of the most bizarre consequences of quantum mechanics. Conside
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\linewidth]{potential_barrier.pdf}
-    \caption{Rectangular potential barrier of width $b$ and height $V_0$, approximated by a delta function as $b\to 0$ with constant area $\beta=bV_0$. In blue we represent the incoming wavefunction of an electron with energy $E<V_0$.}
+    \includegraphics[width=0.6\linewidth]{potential_barrier.pdf}
+    \caption{Rectangular potential barrier of width $b$ and height $V_0$, approximated by a delta function as $b\to 0$ with constant area $\beta=bV_0$. In blue, we represent the incoming wavefunction of an electron with energy $E<V_0$. Note that the amplitude of the wave is a different concept that the potential, but is represented on the same axis for illustrative purposes.}
     \label{fig:potential_barrier}
 \end{figure}
 
@@ -147,9 +144,9 @@ The TISE for this barrier will be:
     -\frac{\hbar^2}{2m}\frac{d^2u}{dx^2} + \beta\delta(x)u(x)=Eu(x)
 \end{equation}
 
-We have two regions with no potential separated by an infinite barrier: $x<0$ and $x>0$. Let's say we emit an electron with energy $E$ from the left towards the barrier. In this region the TISE looks like a harmonic oscillator, so the solutions are again complex exponentials. Furthermore, as the electron is moving to the right, our solution here is $u(x)=e^{ikx}$ with $k=\sqrt{2mE}/\hbar$.
+We have two regions with no potential separated by an infinite barrier: $x<0$ and $x>0$. Let's say we emit an electron with energy $E$ from the left towards the barrier. In this region, the TISE looks like a harmonic oscillator, so the solutions are again complex exponentials. Furthermore, as the electron is moving to the right, our solution here is $u(x)=e^{ikx}$ with $k=\sqrt{2mE}/\hbar$.
 
-Now let's see what happens when the electron hits the barrier. There's two possibilities: either the electron is transmitted through the barrier or it is reflected. Let's consider both options. We will consider a reflected left-traveling wave at $x<0$ and a transmitted right-traveling wave at $x>0$. The coefficients $r$ and $t$ will determine how much of the original wave is transmitted or reflected:
+Now let's see what happens when the electron hits the barrier. There are two possibilities: either the electron is transmitted through the barrier, or it is reflected. Let's consider both options. We will consider a reflected left-traveling wave at $x<0$ and a transmitted right-traveling wave at $x>0$. The coefficients $r$ and $t$ will determine how much of the original wave is transmitted or reflected:
 \begin{equation}
     u(x)=\begin{cases}
         e^{ikx}+re^{-ikx} & x<0 \\
@@ -162,11 +159,15 @@ As $u$ has to be continuous at $x=0$, we need $u(0^+)=u(0^-)$, so
 \begin{equation}
     1+r=t \label{eq:condition_1}
 \end{equation}
-Furthermore, by integrating the TISE over a small interval $(-\varepsilon, \varepsilon)$, we see that its derivative is discontinuous with a jump of:
+Furthermore, by integrating the TISE over a small interval:
+\begin{equation}
+    -\frac{\hbar^2}{2m}\int_{-\varepsilon}^{\varepsilon} \frac{d^2u}{dx^2}dx + \beta\int_{-\varepsilon}^{\varepsilon} \delta(x)u(x)dx = E\int_{-\varepsilon}^{\varepsilon} u(x)dx
+\end{equation}
+and taking the limit $\varepsilon\to0$, we see that the RHS goes to zero. Solving the integrals on the RHS and rearranging, we see that its derivative is discontinuous with a jump of:
 \begin{equation*}
     u'(0^+)-u'(0^-)=\frac{2m\beta}{\hbar^2}u(0)
 \end{equation*}
-This gives the equation:
+Fortunately, this is the hardest math we will see for the rest of the essay. If you didn't follow, just note that this gives the equation:
 \begin{equation}
     ikt-ik+ikr=\frac{2m\beta}{\hbar^2}t \label{eq:condition_2}
 \end{equation}
@@ -181,7 +182,7 @@ where we have named $q=m\beta/\hbar^2$. Remember that probabilities are given by
 \end{equation*}
 You can calculate $|r|^2$ and verify that both probabilities add up to 1. Using typical values for an electron and the barrier ($E = 1$ eV, $\beta = 2 $ eV Å), we get that the tunneling probability is of around 79\%, so most electrons actually go through the barrier!
 
-Although bizarre, let's make sense of this expression: as the strength of the barrier (although it is already infinite) grows, $\beta \to \infty$, the tunneling probability goes to zero. This makes sense, and is equivalent to having an infinite barrier with finite width in the finite barrier case. We also see that as the electron's energy grows, $E\to\infty$, $|t|^2\to 1$. This also makes sense, if the electron has enough energy to go over the barrier, it will always do.
+Although bizarre, let's make sense of this expression: as the strength of the barrier (although it is already infinite) grows, $\beta \to \infty$, the tunneling probability goes to zero. This makes sense and is equivalent to having an infinite barrier with finite width in the finite barrier case. We also see that as the electron's energy grows, $E\to\infty$, $|t|^2\to 1$. This also makes sense, if the electron has enough energy to go over the barrier, it will always do.
 
 This property is an exclusively quantum result, called quantum tunneling, and applies to all barriers. Although not guaranteed, there is always a possibility that an electron tunnels through a barrier, and it decreases with barrier width and height.
 
@@ -192,12 +193,12 @@ You might be wondering where potential barriers come up in practice. Well, they 
 Let's try to model a simple solid in 1 dimension and see what we get. We will have nuclei set at periodic positions in a lattice, each with a potential of $V(x)\propto 1/|x-x_i|$. We can approximate \cite{kronigpenney1931} this structure by using delta functions as seen in figure \ref{fig:kp_potential}. This is called the Kronig-Penney model \cite{kittel2004}.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\linewidth]{kp_potential.pdf}
+    \includegraphics[width=0.6\linewidth]{kp_potential.pdf}
     \caption{Kronig-Penney approximation for the potential of a 1D solid.}
     \label{fig:kp_potential}
 \end{figure}
 
-But this is just the same problem we have just solved, with $\beta<0$, and with periodic barriers set apart a distance $a$. Let's look at the barrier set at $x=0$. Now we have one electron at each side of the barrier, so we have two wavefunctions superposed with coefficients: $u(x)=Au_\text{left}(x)+Bu_\text{right}(x)$ (we will follow the derivation at [\citen{ashcroft1976solid}] and [\citen{plancks2025solutions}]). Each wavefunction corresponds to an electron going towards the barrier, so:
+But this is just the same problem we have just solved, with $\beta<0$, and with periodic barriers set apart a distance $a$. Let's look at the barrier set at $x=0$. Assuming each box delimited by the barriers contains one electron, our solution now will look like two wavefunctions superposed with coefficients, one from the left box and one from the right box: $u(x)=Au_\text{left}(x)+Bu_\text{right}(x)$ (we will follow the derivation at [\citen{ashcroft1976solid}] and [\citen{plancks2025solutions}]). Each wavefunction corresponds to an electron going towards the barrier, so:
 \begin{equation}
     u_\text{left}(x)=\begin{cases}
         e^{ikx}+re^{-ikx} & x<0 \\
@@ -222,14 +223,14 @@ where $\lambda$ is a real number corresponding to the crystal ``momentum" \cite{
 \begin{equation}
     \cos(\lambda a)=\cos(ka)+qa\frac{\sin(ka)}{ka} \label{eq:bands}
 \end{equation}
-where $q=m\beta/\hbar^2$ and $k=\sqrt{2mE}/\hbar$. As the left hand side is a real cosine (and $\lambda$ is real), the right hand side must be between $-1$ and $1$. But wait, this isn't \textit{always} the case, so there are values of $E$ for which there is no $\lambda$, so no possible solution at that region. This results in allowed regions, called \textbf{bands}, and forbidden regions, called \textbf{gaps}. 
+where $q=m\beta/\hbar^2$ and $k=\sqrt{2mE}/\hbar$. As the left-hand side is a real cosine (and $\lambda$ is real), the right-hand side must be between $-1$ and $1$. But wait, this isn't \textit{always} the case, so there are values of $E$ for which there is no $\lambda$, so no possible solution in that region. This results in allowed regions, called \textbf{bands}, and forbidden regions, called \textbf{gaps}. 
 
 Plotting the regions where there is a lambda value in blue as a function of the energy $E$, we obtain figure \ref{fig:bands}.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.6\linewidth]{bands_silicon_wide.pdf}
-    \caption{Conduction bands of a 1D crystal. The dotted red lines represent $-1$ and $1$. In blue the allowed energy bands, and in white the forbidden gaps.}
+    \caption{Conduction bands of a 1D crystal. The dotted red lines represent $-1$ and $1$. The allowed energy bands are in blue, and the forbidden gaps in white.}
     \label{fig:bands}
 \end{figure}
 
@@ -238,8 +239,8 @@ Other results from Quantum show that energy is quantized, and no two electrons c
 Let's look at different possibilities for $qa$\cite{sabiovera2024}:
 \begin{enumerate}
     \item $qa\approx 0$: the behavior of \eqref{eq:bands} is dominated by the cosine term, so most regions lie between -1 and 1, resulting in large bands and small gaps (see figure \ref{fig:bands_copper}). When an external electric field is applied, electrons have many available energy levels to move into, so they can easily move through the material. We call these materials \textbf{conductors}.
-    \item $qa\sim 5$: the sine term dominates, so most regions lie outside -1 and 1, resulting in small bands and large gaps (see figure \ref{fig:bands_nacl}). When the valence band is completely filled, there are no available energy levels for the electrons to move into when an external field is applied, so they cannot move through the material. We call these materials \textbf{insulators}.
-    \item $qa>> 1$: both terms are comparable, resulting in bands and gaps of similar size (see figure \ref{fig:bands_silicon}). When the valence band is completely filled, there are no available energy levels for the electrons to move into when an external field is applied, so they cannot move through the material. However, as the gap to the next band is small, electrons can jump into the next band and move through the material with a small energy input. We call these materials \textbf{semiconductors}.
+    \item $qa>> 1$: the sine term dominates, so most regions lie outside -1 and 1, resulting in small bands and large gaps (see figure \ref{fig:bands_nacl}). When the valence band is completely filled, there are no available energy levels for the electrons to move into when an external field is applied, so they cannot move through the material. We call these materials \textbf{insulators}.
+    \item $qa\sim 5$: both terms are comparable, resulting in bands and gaps of similar size (see figure \ref{fig:bands_silicon}). When the valence band is completely filled, there are no available energy levels for the electrons to move into when an external field is applied, so they cannot move through the material. However, as the gap to the next band is small, electrons can jump into the next band and move through the material with a small energy input. We call these materials \textbf{semiconductors}.
 \end{enumerate}
 
 \begin{figure}[H]
@@ -247,24 +248,24 @@ Let's look at different possibilities for $qa$\cite{sabiovera2024}:
      \begin{subfigure}[b]{0.32\textwidth}
          \centering
          \includegraphics[width=\textwidth]{bands_copper.pdf}
-         \caption{\tiny{Cu (conductor), $qa=0.769$}}
+         \caption{\tiny{Cu (conductor)\cite{latticeconstants}, $qa=0.769$}}
          \label{fig:bands_copper}
      \end{subfigure}
      \hfill
      \begin{subfigure}[b]{0.32\textwidth}
          \centering
          \includegraphics[width=\textwidth]{bands_nacl.pdf}
-         \caption{\tiny{NaCl (insulator), $qa=8.91$}}
+         \caption{\tiny{NaCl (insulator)\cite{latticeconstants}, $qa=8.91$}}
          \label{fig:bands_nacl}
      \end{subfigure}
      \hfill
      \begin{subfigure}[b]{0.32\textwidth}
          \centering
          \includegraphics[width=\textwidth]{bands_silicon.pdf}
-         \caption{\tiny{Si (semiconductor), $qa=4.64$}}
+         \caption{\tiny{Si (semiconductor)\cite{latticeconstants}, $qa=4.64$}}
          \label{fig:bands_silicon}
      \end{subfigure}
-     \caption{Conduction bands of various materials using the Kronig-Penney model. In blue the allowed energy bands, and in white the forbidden gaps.\cite{latticeconstants}\cite{bandsnote}}
+     \caption{Conduction bands of various materials using the Kronig-Penney model. The allowed energy bands are in blue, and the forbidden gaps in white.\cite{bandsnote}}
      \label{fig:bands_materials}
 \end{figure}
 
@@ -274,9 +275,10 @@ This model is just a 1D simplification of how materials work, for example, it do
 
 Quantum mechanics is our best theory of nature yet. We have just glanced at its applications by looking at quantum crystals, but they go much further: Quantum Field Theory manages to explain all of physics but gravity and a few small results, and has been proven right in most of its predictions.
 
-Nevertheless, it is still one of the least intuitive theories we have ever developed. It was rejected by many when it started to be developed, even by some of its own creators such as Einstein and Schrödinger.
+Nevertheless, it is still one of the least intuitive theories we have ever developed. It was rejected by many during its development, even by some of its own creators, such as Einstein and Schrödinger.
 
-Today you got a taste of the weirdness of quantum mechanics: the three new facts we have to accept to explain experiments, as well as of its usefulness: how quantum tunneling, one of the most disconcerting resutls of quantum, gives rise to a model of crystals and conductivity unthinkable with classical mechanics.
+Today you got a taste of the weirdness of quantum mechanics: the three fundamental facts we have to accept to explain experiments, as well as of its usefulness: how quantum tunneling, one of the most disconcerting resutls of quantum, gives rise to a model of crystals and conductivity unthinkable with classical mechanics. If you accept quantum's weirdness, you will be able to take on a journey towards understanding our most advanced tech and unthinkable with classical physics.
+% The journey you have started with this guide will show you how this weird field is the most applicable
 
 \nocite{*}
 \bibliographystyle{unsrturl}
@@ -286,6 +288,8 @@ Today you got a taste of the weirdness of quantum mechanics: the three new facts
 % To do list:
 % - cites for figure 6 & 7 and values for t^2
 % - resesarch & writing methods review
+% - review suggestions and grammar
+% - textbook pages on references
 % - R1: Do the references cited appropriately support the text?
 
 \end{document}

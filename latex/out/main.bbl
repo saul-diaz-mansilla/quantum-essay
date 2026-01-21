@@ -12,6 +12,8 @@ Agustín Sabio~Vera.
 \newblock Competition Problem Solutions, 2025.
 \newblock Includes solutions for Classical Mechanics, Electromagnetism, and
   Quantum Control.
+\newblock URL:
+  \url{https://estudiantes.rsef.es/PreliminaresPLANCKS/2025/PreliminaresPLANCKS25_Solutions.pdf}.
 
 \bibitem{foulkes_notes}
 Matthew Foulkes.
@@ -25,17 +27,17 @@ David~J. Griffiths and Darrell~F. Schroeter.
 \newblock {\em Introduction to Quantum Mechanics}.
 \newblock Cambridge University Press, 3rd edition, 2018.
 
-\bibitem{einstein1905heuristic}
-Albert Einstein.
-\newblock {\"U}ber einen die erzeugung und verwandlung des lichtes betreffenden
-  heuristischen gesichtspunkt.
-\newblock {\em Annalen der Physik}, 17(6):132--148, 1905.
-
 \bibitem{feynman1965lectures}
 Richard~P. Feynman, Robert~B. Leighton, and Matthew Sands.
 \newblock {\em The Feynman Lectures on Physics, Vol. III: The New Millennium
   Edition: Quantum Mechanics}, volume~3.
 \newblock Basic Books, New York, 2011.
+
+\bibitem{einstein1905heuristic}
+Albert Einstein.
+\newblock {\"U}ber einen die erzeugung und verwandlung des lichtes betreffenden
+  heuristischen gesichtspunkt.
+\newblock {\em Annalen der Physik}, 17(6):132--148, 1905.
 
 \bibitem{kronigpenney1931}
 Ralph de~Laer Kronig and William~George Penney.
@@ -62,9 +64,9 @@ Neil~W. Ashcroft and N.~David Mermin.
 
 \bibitem{bandsnote}
 Lattice constants are obtained from the previous reference and potential
-  heights and widths are taken to get a representative value of qa. These
-  figures are based on approximate parameters and do not accurately represent
-  the physical behavior of these crystals. Made for illustrative purposes.
+  heights and widths are taken to get a representative value of qa. The rest of
+  the parameters the figures are based on are built for illustrative purposes,
+  as more complex models are needed to find the real bands of these materials.
 
 \bibitem{figuresnote}
 All figures were made with python using the mathematical equations provided in

@@ -17,9 +17,9 @@
 % A short guide to Quantum's hot tourist attractions: from wavefunctions to semiconductors
 \title{A short guide to Quantum's hot tourist attractions: from wavefunctions to semiconductors}
 \author{Saúl Díaz Mansilla, CID 06070018}
-\date{\small (Word count: 298 + 2303)}
+\date{\small (Word count: 303 + 2315)}
 
-\renewcommand{\abstractname}{Research and methods}
+\renewcommand{\abstractname}{Research and writing methods}
 
 \begin{document}
 
@@ -32,9 +32,9 @@
 
     When I had finished the outline, I solved the quantum tunneling problem in various ways to find the simplest one to understand, and did the same for the Kronig-Penney model. Then, I started to think of analogies and experiments to motivate the wavefunction concept. I finally settled on the double slit experiment, as it can be used both as a thought experiment, when thinking about sending particles one by one, and an actual experiment that has been verified.
 
-    Figures were made using \textit{python}, and I sped up the process using GAI to quickly write the main scripts to then modify them myself according to the result I wanted. I also used GAI to quickly find suitable parameters for figure \ref{fig:bands_materials}, which I then verified using scientific sources.
+    Figures were made using \textit{python}, and I sped up the process using GAI to quickly write the main scripts to then modify them myself according to the result I wanted. I also used GAI to quickly find suitable parameters for figure \ref{fig:bands_materials}, which I then verified using other sources.
 
-    Finally, it was just a matter of putting everything together (figures and equations) and started writing. Then I revised the text a bunch of times, checking with the rubric, to find poorly explained sections and to polish format and logic.
+    Then it was just a matter of putting everything together (figures and equations) and writing. I revised the text a various times, checking with the rubric, to find poorly explained sections and to polish format and logic. I finally used AI to check for typos.
 
 \end{abstract}
 
@@ -197,7 +197,7 @@ Let's try to model a simple solid in 1 dimension and see what we get. We will ha
     \label{fig:kp_potential}
 \end{figure}
 
-But this is just the same problem we have just solved, with $\beta<0$, and with periodic barriers set apart a distance $a$. Let's look at the barrier set at $x=0$. Now we have one electron at each side of the barrier, so we have two wavefunctions superposed with coefficients: $u(x)=Au_\text{left}(x)+Bu_\text{right}(x)$ (we will follow the derivation at [\citen{plancks2025solutions}]). Each wavefunction corresponds to an electron going towards the barrier, so:
+But this is just the same problem we have just solved, with $\beta<0$, and with periodic barriers set apart a distance $a$. Let's look at the barrier set at $x=0$. Now we have one electron at each side of the barrier, so we have two wavefunctions superposed with coefficients: $u(x)=Au_\text{left}(x)+Bu_\text{right}(x)$ (we will follow the derivation at [\citen{ashcroft1976solid}] and [\citen{plancks2025solutions}]). Each wavefunction corresponds to an electron going towards the barrier, so:
 \begin{equation}
     u_\text{left}(x)=\begin{cases}
         e^{ikx}+re^{-ikx} & x<0 \\
@@ -229,7 +229,7 @@ Plotting the regions where there is a lambda value in blue as a function of the 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.6\linewidth]{bands_silicon_wide.pdf}
-    \caption{Conduction bands of a 1D crystal (Si). The dotted red lines represent $-1$ and $1$. In blue the allowed energy bands, and in white the forbidden gaps.}
+    \caption{Conduction bands of a 1D crystal. The dotted red lines represent $-1$ and $1$. In blue the allowed energy bands, and in white the forbidden gaps.}
     \label{fig:bands}
 \end{figure}
 
@@ -237,9 +237,9 @@ Other results from Quantum show that energy is quantized, and no two electrons c
 
 Let's look at different possibilities for $qa$\cite{sabiovera2024}:
 \begin{enumerate}
-    \item $qa\sim 1$: the behavior of \eqref{eq:bands} is dominated by the cosine term, so most regions lie between -1 and 1, resulting in large bands and small gaps (see figure \ref{fig:bands_copper}). When an external electric field is applied, electrons have many available energy levels to move into, so they can easily move through the material. We call these materials \textbf{conductors}.
+    \item $qa\approx 0$: the behavior of \eqref{eq:bands} is dominated by the cosine term, so most regions lie between -1 and 1, resulting in large bands and small gaps (see figure \ref{fig:bands_copper}). When an external electric field is applied, electrons have many available energy levels to move into, so they can easily move through the material. We call these materials \textbf{conductors}.
     \item $qa\sim 5$: the sine term dominates, so most regions lie outside -1 and 1, resulting in small bands and large gaps (see figure \ref{fig:bands_nacl}). When the valence band is completely filled, there are no available energy levels for the electrons to move into when an external field is applied, so they cannot move through the material. We call these materials \textbf{insulators}.
-    \item $qa\sim 10$: both terms are comparable, resulting in bands and gaps of similar size (see figure \ref{fig:bands_silicon}). When the valence band is completely filled, there are no available energy levels for the electrons to move into when an external field is applied, so they cannot move through the material. However, as the gap to the next band is small, electrons can jump into the next band and move through the material with a small energy input. We call these materials \textbf{semiconductors}.
+    \item $qa>> 1$: both terms are comparable, resulting in bands and gaps of similar size (see figure \ref{fig:bands_silicon}). When the valence band is completely filled, there are no available energy levels for the electrons to move into when an external field is applied, so they cannot move through the material. However, as the gap to the next band is small, electrons can jump into the next band and move through the material with a small energy input. We call these materials \textbf{semiconductors}.
 \end{enumerate}
 
 \begin{figure}[H]
@@ -264,7 +264,7 @@ Let's look at different possibilities for $qa$\cite{sabiovera2024}:
          \caption{\tiny{Si (semiconductor), $qa=4.64$}}
          \label{fig:bands_silicon}
      \end{subfigure}
-     \caption{Conduction bands of various materials using the Kronig-Penney model. In blue the allowed energy bands, and in white the forbidden gaps.}
+     \caption{Conduction bands of various materials using the Kronig-Penney model. In blue the allowed energy bands, and in white the forbidden gaps.\cite{latticeconstants}\cite{bandsnote}}
      \label{fig:bands_materials}
 \end{figure}
 
@@ -278,19 +278,14 @@ Nevertheless, it is still one of the least intuitive theories we have ever devel
 
 Today you got a taste of the weirdness of quantum mechanics: the three new facts we have to accept to explain experiments, as well as of its usefulness: how quantum tunneling, one of the most disconcerting resutls of quantum, gives rise to a model of crystals and conductivity unthinkable with classical mechanics.
 
-% Some of its core features are still unsettling for many physicists today: are particles \textit{really} in multiple places at once? What does \textit{measuring} a particle mean?
-
-\bibliographystyle{unsrt}
+\nocite{*}
+\bibliographystyle{unsrturl}
 
 \bibliography{bibliography}
 
 % To do list:
 % - cites for figure 6 & 7 and values for t^2
-% - review superposition section
 % - resesarch & writing methods review
-% - N1: Does the essay describe the background context of its subject? Does it indicate why the reader should be interested?
-% - N4: Do concluding comments, even if brief, reinforce the main points and describe their implications?
-% - M2: Is the quantity of mathematical expressions appropriate? Are there enough to be precise, but not so many as to disrupt the narrative? (tunneling)
 % - R1: Do the references cited appropriately support the text?
 
 \end{document}

@@ -70,10 +70,6 @@ Now, what happens we send a single photon? \textit{A priori} you would think tha
 
 To make things worse, if we repeat this experiment with electrons (which are \textit{obviously} particles) we don't observe what we would expect from a particle, but again a new interference pattern. Then... are electrons not particles?
 
-% The answer to this apparent paradox comes by accepting three new facts about how nature works:
-
-% Brilliant minds managed to explain this paradoxical result by using three ``pills" that lay the foundations of the quantum theory (and they are hard pills to swallow!):
-
 Quantum mechanics offers us a trade to explain this apparent paradox: we obtain the result we observe, but have to accept three new facts about nature at small scales:
 \begin{enumerate}
     \item \textbf{Wavefunctions}: quantum objects are neither a wave nor a particle: they are something new, described by a mathematical tool called the \textit{wavefunction}, $\psi(\vec{r},t)$ (for electrons, photons are more complicated as they travel at relativistic speeds). It is complex-valued and ``makes sure" each individual particle has the wave-like properties we observe globally.
@@ -107,8 +103,6 @@ You might notice that this equation is surprisingly simple, and has a key featur
 
 This gives rise to one of the most famous consequences of quantum mechanics: \textbf{superposition}. We have already seen this effect in our previous experiment: we can think of a wavefunction $\psi_1$ when the electron \textit{only} goes through the first slit, and $\psi_2$ when the electron \textit{only} goes through the second one. Then the wavefunction we get through the histogram is a superposition of both: the electron is ``going through both slits at once".
 
-% Imagine an electron and two boxes and Schrödinger's equation has two solutions: at $\psi_A$ the electron is inside box A, and at $\psi_B$, the electron is inside box B. Then, for example, $1/\sqrt{2} (\psi_A + \psi_B)$ is also a solution. Now if we ``open'' box A, the electron will be there 50\% of the time and it will be at box B the other 50\%. But once you open the box and find the electron at, say, box A, the wavefunction becomes $\psi_A$, and you will always find the electron at box A after.
-
 Now let's see how to solve the Schrödinger equation. It turns out that the time-dependent part of this equation is really easy to solve. For a state with energy $E$, the solutions are \cite{foulkes_notes} $\psi(x,t)=u(x)e^{-i\omega t}$, where $E=\hbar\omega$. Substituting this on equation \eqref{eq:tdse}, we get the time-independent Schrödinger equation (TISE):
 \begin{equation}
     -\frac{\hbar^2}{2m}\frac{d^2u}{dx^2}+V(x)u(x)=Eu(x) \label{eq:tise}
@@ -125,8 +119,6 @@ so the solutions to this equation are sines and cosines, or alternatively, compl
 where $\mathcal{R}$ and $\mathcal{L}$ are just (complex) coefficients.
 
 I am being deliberately vague about equality in the previous equations, as in general, an electron can be in a superposition of infinitely many plane waves with different coefficients for each one.
-
-% but as $k=\sqrt{2mE}/\hbar$, we have that $\omega=\hbar k^2/2m$, which is different from the relation for light waves, $\omega=ck$.
 
 \section{Quantum tunneling: when intuition fails}
 
@@ -277,20 +269,11 @@ Quantum mechanics is our best theory of nature yet. We have just glanced at its 
 
 Nevertheless, it is still one of the least intuitive theories we have ever developed. It was rejected by many during its development, even by some of its own creators, such as Einstein and Schrödinger.
 
-Today you got a taste of the weirdness of quantum mechanics: the three fundamental facts we have to accept to explain experiments, as well as of its usefulness: how quantum tunneling, one of the most disconcerting resutls of quantum, gives rise to a model of crystals and conductivity unthinkable with classical mechanics. 
-% If you accept quantum's weirdness, you will be able to take on a journey towards understanding our most advanced tech and unthinkable with classical physics.
-% The journey you have started with this guide will show you how this weird field is the most applicable
+Today you got a taste of the weirdness of quantum mechanics: the three fundamental facts we have to accept to explain experiments, as well as of its usefulness: how quantum tunneling, one of the most disconcerting resutls of quantum, gives rise to a model of crystals and conductivity unthinkable with classical mechanics.
 
 \nocite{*}
 \bibliographystyle{unsrturl}
 
 \bibliography{bibliography}
-
-% To do list:
-% - cites for figure 6 & 7 and values for t^2
-% - resesarch & writing methods review
-% - review suggestions and grammar
-% - textbook pages on references
-% - R1: Do the references cited appropriately support the text?
 
 \end{document}

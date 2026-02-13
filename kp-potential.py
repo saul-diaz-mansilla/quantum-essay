@@ -1,61 +1,55 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from landaubeta import use_latex_fonts, use_IEEE_style
-# use_latex_fonts()
-use_IEEE_style()
+use_latex_fonts()
 
-def plot_kp_vs_coulomb():
+def plot_final_diagram_with_arrows():
     num_atoms = 5
-    lattice_const = 20.0  # Increased spacing between nuclei
+    a_dist = 20.0  
+    x = np.linspace(-1, (num_atoms - 1) * a_dist + 2, 3000)
     
-    # Grid for plotting
-    x = np.linspace(-2, (num_atoms - 1) * lattice_const + 2, 5000)
-    
-    # 1. Realistic Potential (Coulomb-like: -1/|x|)
-    # We drop the softening parameter. To avoid division by zero during 
-    # calculation, we use a tiny clipping value (1e-3).
+    # 1. Potentials
     v_real = np.zeros_like(x)
-    for i in range(num_atoms):
-        center = i * lattice_const
-        dist = np.abs(x - center)
-        # The potential goes to -infinity at the center
-        v_real -= 1.0 / np.maximum(dist, 1e-3)
-
-    # 2. Kronig-Penney Approximation
-    # Making the 'step' negative (wells) and increasing its dimensions
-    well_width = 1  # Wider steps
-    v0 = -20.0         # Deeper negative potential
-    
     v_kp = np.zeros_like(x)
+    well_width, v0 = 1.0, -20.0
     for i in range(num_atoms):
-        center = i * lattice_const
-        # Define the rectangular well bounds
-        well_start = center - well_width / 2
-        well_end = center + well_width / 2
-        v_kp = np.where((x >= well_start) & (x <= well_end), v0, v_kp)
+        center = i * a_dist
+        v_real -= 1.8 / np.maximum(np.abs(x - center), 0.15)
+        v_kp = np.where(np.abs(x - center) <= well_width/2, v0, v_kp)
 
-    # Plotting
-    plt.figure(figsize=(12, 6))
+    fig, ax = plt.subplots(figsize=(9, 4.5))
     
-    # Plotting Realistic Potential
-    plt.plot(x, v_real, label=r"Realistic Potential ($-1/|x|$)", color='royalblue', lw=1.5)
-    
-    # Plotting K-P Approximation (Step/Rectangular Wells)
-    plt.step(x, v_kp, label="Kronig-Penney (Negative Wells)", color='crimson', 
-             where='mid', lw=2.5, alpha=0.9)
+    # Plotting lines
+    ax.plot(x, v_real, color='#1f77b4', lw=2, label="Atomic Potential")
+    ax.plot(x, v_kp, color='#d62728', lw=2.5, label="Kronig-Penney")
 
-    plt.title("Atomic Potential vs. Kronig-Penney Model (Negative Wells)", fontsize=14)
-    plt.xlabel("Position ($x$)", fontsize=12)
-    plt.ylabel("Potential Energy $V(x)$", fontsize=12)
-    plt.axhline(0, color='black', linewidth=0.8, linestyle='--')
+    # --- AXES STYLING ---
+    # Move X-axis to zero
+    ax.spines['bottom'].set_position('zero')
+    ax.spines['left'].set_position(('data', -1)) # Set Y-axis at the start of plot
+    ax.spines['top'].set_visible(False)
+    ax.spines['right'].set_visible(False)
     
-    # Set y-limit to focus on the structure of the wells
-    plt.ylim(-10, 1)
+    # Add Arrow at the end of X-axis
+    ax.plot(1, 0, ">k", transform=ax.get_yaxis_transform(), clip_on=False)
+    # Add Arrow at the end of Y-axis
+    ax.plot(-1, 1, "^k", transform=ax.get_xaxis_transform(), clip_on=False)
+
+    # Label Positioning
+    ax.text(1.03, 0, '$x$', transform=ax.get_yaxis_transform(), 
+            ha='left', va='center', fontsize=14, fontweight='bold')
+    ax.text(-1, 1.05, '$V(x)$', transform=ax.get_xaxis_transform(), 
+            ha='center', va='bottom', fontsize=14, fontweight='bold')
+
+    # Ticks on top of the x-axis line
+    ticks = [i * a_dist for i in range(num_atoms)]
+    ax.set_xticks(ticks)
+    ax.set_xticklabels(['0'] + [f'${i}a$' for i in range(1, num_atoms)], fontsize=14)
+    ax.tick_params(axis='x', pad=-25) 
+    ax.set_yticks([]) # Hide Y numbers
+    
+    plt.ylim(-10, 2)
     plt.legend(loc='lower right')
-    plt.grid(alpha=0.3)
-    
-    plt.tight_layout()
     plt.show()
 
-if __name__ == "__main__":
-    plot_kp_vs_coulomb()
+plot_final_diagram_with_arrows()
